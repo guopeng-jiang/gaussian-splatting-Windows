@@ -3,7 +3,7 @@
     {
     "method": "shell.run",
     "params": {
-      "message": "start cmd.exe /k activate.bat {{path.resolve(cwd, 'gaussian-splatting', 'conda_env')}} && explorer.exe .\\gaussian-splatting"
+      "message": "start cmd.exe /k activate.bat gaussian-splatting && explorer.exe ."
     }
   }
   ]
