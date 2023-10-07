@@ -25,7 +25,43 @@
   }, {
     "method": "shell.enter",
     "params": {
-      "message": "conda create -y -n gaussian-splatting python=3.10",
+      "message": "git submodule deinit -f -- submodules/diff-gaussian-rasterization",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "git submodule deinit -f -- submodules/simple-knn",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "git submodule update --init --recursive",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "git submodule status --recursive",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "conda create -y -n gaussian-splatting python=3.7.13",
       "on": [{
         "event": null,
         "return": true
@@ -43,7 +79,7 @@
   }, {
     "method": "shell.enter",
     "params": {
-      "message": "conda install -y pytorch=1.12.1 torchvision=0.13.1 torchaudio=0.12.1 pytorch-cuda=11.8 plyfile libffi tqdm -c pytorch -c conda-forge -c nvidia -c defaults",
+      "message": "conda install -y cudatoolkit=11.6 plyfile=0.8.1 pytorch=1.12.1 torchaudio=0.12.1 torchvision=0.13.1 tqdm -c pytorch -c conda-forge -c nvidia -c defaults",
       "on": [{
         "event": null,
         "return": true
@@ -52,7 +88,7 @@
   }, {
     "method": "shell.enter",
     "params": {
-      "message": "conda install -y cudnn cudatoolkit -c nvidia",
+      "message": "pip install submodules/diff-gaussian-rasterization",
       "on": [{
         "event": null,
         "return": true
@@ -61,7 +97,7 @@
   }, {
     "method": "shell.enter",
     "params": {
-      "message": "conda install -y colmap -c conda-forge",
+      "message": "pip install submodules/simple-knn",
       "on": [{
         "event": null,
         "return": true
@@ -70,7 +106,7 @@
   }, {
     "method": "shell.enter",
     "params": {
-      "message": "pip install simple_knn-0.0.0-cp310-cp310-win_amd64.whl",
+      "message": "pip install submodules/simple-knn",
       "on": [{
         "event": null,
         "return": true
@@ -79,7 +115,7 @@
   }, {
     "method": "shell.enter",
     "params": {
-      "message": "pip install diff_gaussian_rasterization-0.0.0-cp310-cp310-win_amd64.whl",
+      "message": "curl -L https://github.com/colmap/colmap/releases/download/3.8/COLMAP-3.8-windows-cuda.zip > COLMAP.zip",
       "on": [{
         "event": null,
         "return": true
@@ -88,7 +124,25 @@
   }, {
     "method": "shell.enter",
     "params": {
-      "message": "",
+      "message": "tar -xf COLMAP.zip",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "curl -L https://imagemagick.org/archive/binaries/ImageMagick-7.1.1-19-portable-Q16-HDRI-x64.zip > imagemagick.zip",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "tar -xf imagemagick.zip",
       "on": [{
         "event": null,
         "return": true
