@@ -40,7 +40,7 @@ This miniconda envornment can be used outside of Pinokio. So you can just use th
 ### Extra step for inputs that are videos
 This step is for custom inputs. If you have a video, please extract it into image frames. This can be done with FFMPEG. Below is a template for the ffmpeg command.
 ```
-ffmpeg -i file.mp4 -r 1/1 $filename%03d.png
+ffmpeg -i input_data/file.mp4 -r 1/1 input_data/$filename%03d.png
 ```
 
 Now, with a collection of images of a scene, you would need to put the **set** of input images into the `input_data/<your_image_collection>/input` folder. Eg. `fern/input`
@@ -49,12 +49,12 @@ Taking 2 collections (fern and toy_truck) of input images as an example, below i
 ```
 📂gaussian-splatting-Windows.git/ # this is root
 ├── 📂input_data/
-│	├── 📂<fern>/
+│	├── 📂fern/
 │	│	├── 📂input/
 │	│	│	├── 🖼️image1.jpg
 │	│	│	├── 🖼️image2.jpg
 │	│	│	│...
-│	├── 📂<toy_truck>/
+│	├── 📂toy_truck/
 │	│	├── 📂input/
 │	│	│	├── 🖼️image1.jpg
 │	│	│	├── 🖼️image2.jpg
