@@ -158,6 +158,33 @@
       }]
     }
   }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "curl -L https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/binaries/viewers.zip > viewers.zip",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "mkdir viewers",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
+    "method": "shell.enter",
+    "params": {
+      "message": "tar -xf viewers.zip -C viewers",
+      "on": [{
+        "event": null,
+        "return": true
+      }]
+    }
+  }, {
     "method": "input",
     "params": {
       "title": "Install Success",
