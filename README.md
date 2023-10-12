@@ -1,3 +1,135 @@
+# Windows Installation Tutorial For Gaussian Splatting
+This is a Windows tutorial with NVIDIA GPU for running Rerender A Video, but made convenenient with pinokio✨
+
+Keep in mind this tutorial is simplified! For more parameters and customizations, please refer to the original documentation (below).
+
+| **Total file size** | **7GB** |
+|---|---|
+|**VRAM**|**24GB**|
+
+
+You can watch the YouTube tutorial [here]()
+
+## step 1: setting up the environment
+
+Install [Pinokio](https://pinokio.computer/), we wrote a pinokio file where you **just need 1 click to install all of the dependencies**. 
+
+Then open up Pinokio, go to the top right button "Discover" 
+
+![Screenshot 2023-09-10 132723](https://github.com/bycloud-AI/DiffBIR-Windows/assets/29135514/57904874-08fa-482d-ad61-cbe8e60e64f7)
+
+Copy the link of this repository, paste the link at the side that says "enter git URL"
+
+![Screenshot 2023-09-10 132638](https://github.com/bycloud-AI/DiffBIR-Windows/assets/29135514/486e9ef3-6ad4-435f-9605-cd5dcf48d7b9)
+
+And press download
+
+![Screenshot 2023-09-10 132802](https://github.com/bycloud-AI/DiffBIR-Windows/assets/29135514/962dc662-f37d-4334-adcc-2ff2ab13c015)
+
+You can find "gaussian-splatting-Windows.git" in your Pinokio list (if you didn't change the save name). 
+
+Press **Install** to download all the dependencies in a conda env
+
+![Screenshot 2023-09-10 133023](https://github.com/bycloud-AI/DiffBIR-Windows/assets/29135514/69621a37-892b-4814-9020-12745240b56e)
+
+This miniconda envornment can be used outside of Pinokio. So you can just use this script automate the installation processes for dependencies!
+
+## step 2: Structure from Motion (SfM) with COLMAP
+
+
+### Extra step for inputs that are videos
+This step is for custom inputs. If you have a video, please extract it into image frames. This can be done with FFMPEG. Below is a template for the ffmpeg command.
+```
+ffmpeg -i file.mp4 -r 1/1 $filename%03d.png
+```
+
+Now, with a collection of images of a scene, you would need to put the **set** of input images into the `input_data/<your_image_collection>/input` folder. Eg. `fern/input`
+
+Taking 2 collections (fern and toy_truck) of input images as an example, below is the File Structure **requirements** before running `convert.py`. 
+```
+📂gaussian-splatting-Windows.git/ # this is root
+├── 📂input_data/
+│	├── 📂<fern>/
+│	│	├── 📂input/
+│	│	│	├── 🖼️image1.jpg
+│	│	│	├── 🖼️image2.jpg
+│	│	│	│...
+│	├── 📂<toy_truck>/
+│	│	├── 📂input/
+│	│	│	├── 🖼️image1.jpg
+│	│	│	├── 🖼️image2.jpg
+│	│	│	│...
+│ │...
+│...
+```
+
+Now, using `fern` as an example, 
+```
+python convert.py -s input_data/fern --colmap_executable COLMAP-3.8-windows-cuda\COLMAP.bat
+```
+Below is the template:
+```
+python convert.py -s <your_input_dir> --colmap_executable COLMAP-3.8-windows-cuda\COLMAP.bat
+```
+
+## step 3: Train/optimize the images
+
+This step is pretty straight forward, you just got to run the below command (using `fern` as an example):
+```
+python train.py -s input_data/fern
+```
+Below is the template:
+```
+python train.py -s <input_dir>
+```
+
+## step 4: View the result!
+
+Go to the `output` folder, and you can see some randomly generated folder name. You can rename this to anything you want, like the scene name and the times it was ran.
+
+```
+📂gaussian-splatting-Windows.git/ # this is root
+├── 📂output/ 
+│	├── 📂a2973a46-9/ <--
+│ │	├── 📂point_cloud/
+│ │	│	└── ...
+│ │	├── 📜cameras.json/
+│ │	├── 📜cfg_args/
+│ │	└── 📜input.ply/
+│ │...
+│...
+```
+
+So I'll rename mine from `a2973a46-9` -> `fern`
+
+Now, using the below command with `fern` as an example, you can view it in 3D.
+```
+start viewers/bin/SIBR_GaussianViewer_app.exe . -m output\fern
+```
+Below would be a template
+```
+start viewers/bin/SIBR_GaussianViewer_app.exe . -m <output_folder>
+```
+
+And you can use it like below:
+
+https://github.com/graphdeco-inria/gaussian-splatting/assets/40643808/0940547f-1d82-4c2f-a616-44eabbf0f816
+
+
+## The tutorial ends here. 
+
+The following are a copy of the original repository for references.
+
+This tutorial is made by the team at bycloud AI, feel free to support our endevour in making installation tutorials here! 
+
+
+[![Patreon](https://img.shields.io/badge/Patreon-white?style=for-the-badge&logo=Patreon&link=https://patreon.com/bycloud_ai)](https://patreon.com/bycloud_ai)
+ [![Twitter](https://img.shields.io/badge/Twitter-white?style=for-the-badge&logo=twitter&link=https://twitter.com/bycloud_ai)](https://twitter.com/bycloud_ai) [![GitHub](https://img.shields.io/badge/GitHub-white?style=for-the-badge&logo=GitHub&logoColor=black&link=https://github.com/bycloud-ai)](https://github.com/bycloud-ai)
+
+<td><img src="https://i.imgur.com/dAqoN7j.png"></td>
+
+---
+
 # 3D Gaussian Splatting for Real-Time Radiance Field Rendering
 Bernhard Kerbl*, Georgios Kopanas*, Thomas Leimkühler, George Drettakis (* indicates equal contribution)<br>
 | [Webpage](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/) | [Full Paper](https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/3d_gaussian_splatting_high.pdf) | [Video](https://youtu.be/T_kXY43VZnk) | [Other GRAPHDECO Publications](http://www-sop.inria.fr/reves/publis/gdindex.php) | [FUNGRAPH project page](https://fungraph.inria.fr) |<br>
