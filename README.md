@@ -45,7 +45,7 @@ ffmpeg -i file.mp4 -r 1/1 $filename%03d.png
 
 Now, with a collection of images of a scene, you would need to put the **set** of input images into the `input_data/<your_image_collection>/input` folder. Eg. `fern/input`
 
-Taking 2 collections (fern and toy_truck) of input images as an example, below is the File Structure **requirements** before running `convert.py`. 
+Taking 2 collections (fern and toy_truck) of input images as an example, below is the File Structure **requirements** before running `convert.py`. You would need to create these folders.
 ```
 📂gaussian-splatting-Windows.git/ # this is root
 ├── 📂input_data/
