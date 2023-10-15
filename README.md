@@ -8,7 +8,7 @@ Keep in mind this tutorial is simplified! For more parameters and customizations
 |**VRAM**|**24GB**|
 
 
-You can watch the YouTube tutorial [here]()
+You can watch the YouTube tutorial [here](https://youtu.be/P9vs-zN-jFI)
 
 ## step 1: setting up the environment
 
