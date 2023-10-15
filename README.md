@@ -1,5 +1,5 @@
 # Windows Installation Tutorial For Gaussian Splatting
-This is a Windows tutorial with NVIDIA GPU for running Rerender A Video, but made convenenient with pinokio✨
+This is a Windows tutorial for NVIDIA GPUs for running 3D Gaussian Splatting, but made convenenient with pinokio✨
 
 Keep in mind this tutorial is simplified! For more parameters and customizations, please refer to the original documentation (below).
 
