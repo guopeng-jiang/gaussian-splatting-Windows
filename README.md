@@ -1,5 +1,5 @@
 # 3D Gaussian Splatting on Windows: A Definitive Anaconda Setup Guide
-This is a Windows tutorial for NVIDIA GPUs for running 3D Gaussian Splatting. This guide provides a clear, step-by-step process for setting up the original **3D Gaussian Splatting** project on a modern **Windows 10/11** machine using the **Anaconda distribution**.  
+This is a Windows tutorial for NVIDIA GPUs for running 3D Gaussian Splatting. It includes a clear, step-by-step process for setting up the original **3D Gaussian Splatting** project on a modern **Windows 10/11** machine using the **Anaconda distribution**.  
 
 It is specifically designed to overcome common compilation and environment compatibility issues.
 
