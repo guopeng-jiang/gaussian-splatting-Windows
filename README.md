@@ -159,7 +159,7 @@ python -m pip install ./submodules/simple-knn
 
 You will see a lot of compiler output. White or yellow warning messages are normal. The process is successful if it finishes without any red error messages.
 
-## step 2: Structure from Motion (SfM) with COLMAP
+# Step 2: Structure from Motion (SfM) with COLMAP
 
 ### Extra step for inputs that are videos
 This step is for custom inputs. If you have a video, please extract it into image frames. This can be done with FFMPEG. Below is a template for the ffmpeg command.
@@ -196,7 +196,7 @@ Below is the template:
 python convert.py -s <your_input_dir> --colmap_executable COLMAP-3.8-windows-cuda\COLMAP.bat
 ```
 
-## step 3: Train/optimize the images
+# Step 3: Train/optimize the images
 
 This step is pretty straight forward, you just got to run the below command (using `fern` as an example):
 ```
@@ -207,7 +207,7 @@ Below is the template:
 python train.py -s <input_dir>
 ```
 
-## step 4: View the result!
+# Step 4: View the result!
 
 Go to the `output` folder, and you can see some randomly generated folder name. You can rename this to anything you want, like the scene name and the times it was ran.
 
