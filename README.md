@@ -3,12 +3,6 @@ This is a Windows tutorial for NVIDIA GPUs for running 3D Gaussian Splatting. Th
 
 It is specifically designed to overcome common compilation and environment compatibility issues.
 
-| **Total file size** | **7GB** |
-|---|---|
-|**VRAM**|**24GB**|
-
-You can watch the YouTube tutorial [here](https://youtu.be/P9vs-zN-jFI)
-
 ---
 
 ### Phase 1: System Prerequisites
