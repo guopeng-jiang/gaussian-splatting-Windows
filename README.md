@@ -1,7 +1,7 @@
-# Windows Installation Tutorial For Gaussian Splatting
-This is a Windows tutorial for NVIDIA GPUs for running 3D Gaussian Splatting, but made convenenient with pinokio✨
+# 3D Gaussian Splatting on Windows: A Definitive Anaconda Setup Guide
+This is a Windows tutorial for NVIDIA GPUs for running 3D Gaussian Splatting. This guide provides a clear, step-by-step process for setting up the original **3D Gaussian Splatting** project on a modern **Windows 10/11** machine using the **Anaconda distribution**.  
 
-Keep in mind this tutorial is simplified! For more parameters and customizations, please refer to the original documentation (below).
+It is specifically designed to overcome common compilation and environment compatibility issues.
 
 | **Total file size** | **7GB** |
 |---|---|
@@ -9,22 +9,17 @@ Keep in mind this tutorial is simplified! For more parameters and customizations
 
 You can watch the YouTube tutorial [here](https://youtu.be/P9vs-zN-jFI)
 
-# 3D Gaussian Splatting on Windows: A Definitive Anaconda Setup Guide
-
-This guide provides a clear, step-by-step process for setting up the original **3D Gaussian Splatting** project on a modern **Windows 10/11** machine using the **Anaconda distribution**.  
-It is specifically designed to overcome common compilation and environment compatibility issues.
-
 ---
 
-## Phase 1: System Prerequisites
+### Phase 1: System Prerequisites
 
 Before you begin, ensure your system has the following software installed:
 
-### NVIDIA Drivers
+#### NVIDIA Drivers
 - Install the latest **Game Ready** or **Studio** drivers for your NVIDIA GPU.  
 - [Download from the official NVIDIA website](https://www.nvidia.com/Download/index.aspx).
 
-### NVIDIA CUDA Toolkit (System-wide)
+#### NVIDIA CUDA Toolkit (System-wide)
 This is required by the compiler to build the custom CUDA source code. While Conda can install its own version, a system-wide installation is more robust.
 Download & Install: Download and install a modern version of the CUDA Toolkit (e.g., 12.1 or newer) that is compatible with your version of Visual Studio.
 Download from the NVIDIA CUDA Toolkit Archive.
@@ -74,29 +69,29 @@ Cuda compilation tools, release 12.4, V12.4.131
 Build cuda_12.4.r12.4/compiler.32843467_0
 ```
 
-### Anaconda
+#### Anaconda
 - Download and install the **Anaconda Distribution for Python 3.x**.  
 - This will be used to manage the project's complex dependencies.  
 - [Download from the official Anaconda website](https://www.anaconda.com/download).
 
-### Visual Studio 2022
+#### Visual Studio 2022
 - Required to compile the project's custom CUDA code.  
 - Download the free **Community version** from the [Visual Studio website](https://visualstudio.microsoft.com/vs/community/).  
 - **Critical:** During installation, select the **"Desktop development with C++"** workload.
 
-### Git for Windows
+#### Git for Windows
 - Required to download the repository and its submodules.  
 - [Download from git-scm.com](https://git-scm.com/download/win).
 
 ---
 
-## Phase 2: Project Download & Setup
+### Phase 2: Project Download & Setup
 
-### Open an Anaconda Prompt
+#### Open an Anaconda Prompt
 - Go to your Windows Start Menu, type **Anaconda Prompt**, and open it.  
 - All subsequent commands will be run in this terminal.
 
-### Clone the Repository
+#### Clone the Repository
 Navigate to a directory where you want to store the project (e.g., `F:\projects`) and run:
 
 ```cmd
@@ -108,7 +103,7 @@ Navigate into the Project Directory:
 cd gaussian-splatting
 ```
 
-# Phase 3: Creating the Correct Conda Environment
+### Phase 3: Creating the Correct Conda Environment
 
 This is the most important phase. We have created a custom environment file (environment.yml) to ensure compatibility between your modern Visual Studio, CUDA, and PyTorch. This configuration is tested and works with modern systems.
 
@@ -145,7 +140,7 @@ Now, create the environment using our new file and the fast solver. This should 
 conda env create --file environment.yml --solver=libmamba
 ```
 
-# Phase 4: Compiling Custom CUDA Extensions
+### Phase 4: Compiling Custom CUDA Extensions
 
 Activate Your New Environment:
 IMPORTANT: You must perform this step every time you open a new terminal to work on this project.
