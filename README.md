@@ -10,32 +10,125 @@ Keep in mind this tutorial is simplified! For more parameters and customizations
 
 You can watch the YouTube tutorial [here](https://youtu.be/P9vs-zN-jFI)
 
-## step 1: setting up the environment
+## 3D Gaussian Splatting on Windows: A Definitive Anaconda Setup Guide
 
-Install [Pinokio](https://pinokio.computer/), we wrote a pinokio file where you **just need 1 click to install all of the dependencies**. 
+# 3D Gaussian Splatting on Windows: A Definitive Anaconda Setup Guide
 
-Then open up Pinokio, go to the top right button "Discover" 
+This guide provides a clear, step-by-step process for setting up the original **3D Gaussian Splatting** project on a modern **Windows 10/11** machine using the **Anaconda distribution**.  
+It is specifically designed to overcome common compilation and environment compatibility issues.
 
-![Screenshot 2023-09-10 132723](https://github.com/bycloud-AI/DiffBIR-Windows/assets/29135514/57904874-08fa-482d-ad61-cbe8e60e64f7)
+---
 
-Copy the link of this repository, paste the link at the side that says "enter git URL"
+## Phase 1: System Prerequisites
 
-![Screenshot 2023-09-10 132638](https://github.com/bycloud-AI/DiffBIR-Windows/assets/29135514/486e9ef3-6ad4-435f-9605-cd5dcf48d7b9)
+Before you begin, ensure your system has the following software installed:
 
-And press download
+### NVIDIA Drivers
+- Install the latest **Game Ready** or **Studio** drivers for your NVIDIA GPU.  
+- [Download from the official NVIDIA website](https://www.nvidia.com/Download/index.aspx).
 
-![Screenshot 2023-09-10 132802](https://github.com/bycloud-AI/DiffBIR-Windows/assets/29135514/962dc662-f37d-4334-adcc-2ff2ab13c015)
+### Anaconda
+- Download and install the **Anaconda Distribution for Python 3.x**.  
+- This will be used to manage the project's complex dependencies.  
+- [Download from the official Anaconda website](https://www.anaconda.com/download).
 
-You can find "gaussian-splatting-Windows.git" in your Pinokio list (if you didn't change the save name). 
+### Visual Studio 2022
+- Required to compile the project's custom CUDA code.  
+- Download the free **Community version** from the [Visual Studio website](https://visualstudio.microsoft.com/vs/community/).  
+- **Critical:** During installation, select the **"Desktop development with C++"** workload.
 
-Press **Install** to download all the dependencies in a conda env
+### Git for Windows
+- Required to download the repository and its submodules.  
+- [Download from git-scm.com](https://git-scm.com/download/win).
 
-![Screenshot 2023-09-10 133023](https://github.com/bycloud-AI/DiffBIR-Windows/assets/29135514/69621a37-892b-4814-9020-12745240b56e)
+---
 
-This miniconda envornment can be used outside of Pinokio. So you can just use this script automate the installation processes for dependencies!
+## Phase 2: Project Download & Setup
+
+### Open an Anaconda Prompt
+- Go to your Windows Start Menu, type **Anaconda Prompt**, and open it.  
+- All subsequent commands will be run in this terminal.
+
+### Clone the Repository
+Navigate to a directory where you want to store the project (e.g., `C:\projects`) and run:
+
+```cmd
+git clone https://github.com/graphdeco-inria/gaussian-splatting.git --recursive
+```
+
+Navigate into the Project Directory:
+```cmd
+cd gaussian-splatting
+```
+
+# Phase 3: Creating the Correct Conda Environment
+
+This is the most important phase. We will create a custom environment file to ensure compatibility between your modern Visual Studio, CUDA, and PyTorch.
+Create a New environment.yml File:
+
+Inside the gaussian-splatting folder, open the existing environment.yml file with a text editor (like Notepad).
+
+Delete all of its content.
+
+Copy and paste the text below into the file. This configuration is tested and works with modern systems.
+
+```Yaml
+name: gaussian_splatting_new
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pip
+  - plyfile
+  - tqdm
+  - pytorch
+  - torchvision
+  - torchaudio
+  - pytorch-cuda=12.1
+```
+
+Install the Fast libmamba Solver (One-Time Setup):
+
+The default Conda solver can be extremely slow. Installing libmamba will make environment creation much faster. Run this command once to install it in your base Anaconda.
+
+```Cmd
+conda install -n base conda-libmamba-solver -y
+```
+
+Create the Conda Environment:
+
+Now, create the environment using our new file and the fast solver. This should take only a few minutes.
+
+```Cmd
+conda env create --file environment.yml --solver=libmamba
+```
+
+# Phase 4: Compiling Custom CUDA Extensions
+
+Activate Your New Environment:
+IMPORTANT: You must perform this step every time you open a new terminal to work on this project.
+
+```Cmd
+conda activate gaussian_splatting_new
+```
+
+Your command prompt will change to show (gaussian_splatting_new) at the beginning.
+
+Compile and Install the Submodules:
+Using python -m pip is the most robust method for installing packages inside a Conda environment. This step uses Visual Studio and CUDA to build the necessary custom components.
+
+```Cmd
+python -m pip install ./submodules/diff-gaussian-rasterization
+```
+
+```Cmd
+python -m pip install ./submodules/simple-knn
+```
+You will see a lot of compiler output. White or yellow warning messages are normal. The process is successful if it finishes without any red error messages.
 
 ## step 2: Structure from Motion (SfM) with COLMAP
-
 
 ### Extra step for inputs that are videos
 This step is for custom inputs. If you have a video, please extract it into image frames. This can be done with FFMPEG. Below is a template for the ffmpeg command.
