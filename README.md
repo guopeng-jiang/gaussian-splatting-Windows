@@ -7,7 +7,6 @@ Keep in mind this tutorial is simplified! For more parameters and customizations
 |---|---|
 |**VRAM**|**24GB**|
 
-
 You can watch the YouTube tutorial [here](https://youtu.be/P9vs-zN-jFI)
 
 # 3D Gaussian Splatting on Windows: A Definitive Anaconda Setup Guide
@@ -24,6 +23,56 @@ Before you begin, ensure your system has the following software installed:
 ### NVIDIA Drivers
 - Install the latest **Game Ready** or **Studio** drivers for your NVIDIA GPU.  
 - [Download from the official NVIDIA website](https://www.nvidia.com/Download/index.aspx).
+
+### NVIDIA CUDA Toolkit (System-wide)
+This is required by the compiler to build the custom CUDA source code. While Conda can install its own version, a system-wide installation is more robust.
+Download & Install: Download and install a modern version of the CUDA Toolkit (e.g., 12.1 or newer) that is compatible with your version of Visual Studio.
+Download from the NVIDIA CUDA Toolkit Archive.
+
+Set Environment Variables: After installation, you must ensure the system knows where to find CUDA.
+
+Open the Windows Start Menu and search for "Edit the system environment variables".
+
+In the System Properties window, click the "Environment Variables..." button.
+
+In the System variables section (the bottom half), find the Path variable, select it, and click "Edit...".
+
+Click "New" and add the following two paths, adjusting the version number (v12.4 in this example) to match the version you installed:
+
+```
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4\bin
+```
+```
+C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4\libnvvp
+```
+Click OK to close the Path editor.
+
+Back in the Environment Variables window, still in the System variables section, click "New..." to create a brand new variable.
+Variable name: CUDA_PATH
+
+Variable value: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.4 (adjust the version number)
+
+Click OK on all open windows to save the changes.
+
+Verify the Installation:
+
+IMPORTANT: Open a new Anaconda Prompt or Command Prompt. (Existing terminals will not see the new environment variables).
+
+Run the following command:
+
+```Cmd
+nvcc --version
+```
+
+The output should show the version you just configured. If it does, your system is correctly set up.
+
+```
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2023 NVIDIA Corporation
+Built on Mon_Apr__3_17:16:06_PDT_2023
+Cuda compilation tools, release 12.4, V12.4.131
+Build cuda_12.4.r12.4/compiler.32843467_0
+```
 
 ### Anaconda
 - Download and install the **Anaconda Distribution for Python 3.x**.  
@@ -48,7 +97,7 @@ Before you begin, ensure your system has the following software installed:
 - All subsequent commands will be run in this terminal.
 
 ### Clone the Repository
-Navigate to a directory where you want to store the project (e.g., `C:\projects`) and run:
+Navigate to a directory where you want to store the project (e.g., `F:\projects`) and run:
 
 ```cmd
 git clone https://github.com/graphdeco-inria/gaussian-splatting.git --recursive
@@ -61,14 +110,7 @@ cd gaussian-splatting
 
 # Phase 3: Creating the Correct Conda Environment
 
-This is the most important phase. We will create a custom environment file to ensure compatibility between your modern Visual Studio, CUDA, and PyTorch.
-Create a New environment.yml File:
-
-Inside the gaussian-splatting folder, open the existing environment.yml file with a text editor (like Notepad).
-
-Delete all of its content.
-
-Copy and paste the text below into the file. This configuration is tested and works with modern systems.
+This is the most important phase. We have created a custom environment file (environment.yml) to ensure compatibility between your modern Visual Studio, CUDA, and PyTorch. This configuration is tested and works with modern systems.
 
 ```Yaml
 name: gaussian_splatting_new
@@ -115,6 +157,7 @@ conda activate gaussian_splatting_new
 Your command prompt will change to show (gaussian_splatting_new) at the beginning.
 
 Compile and Install the Submodules:
+
 Using python -m pip is the most robust method for installing packages inside a Conda environment. This step uses Visual Studio and CUDA to build the necessary custom components.
 
 ```Cmd
@@ -124,6 +167,7 @@ python -m pip install ./submodules/diff-gaussian-rasterization
 ```Cmd
 python -m pip install ./submodules/simple-knn
 ```
+
 You will see a lot of compiler output. White or yellow warning messages are normal. The process is successful if it finishes without any red error messages.
 
 ## step 2: Structure from Motion (SfM) with COLMAP
