@@ -10,8 +10,6 @@ Keep in mind this tutorial is simplified! For more parameters and customizations
 
 You can watch the YouTube tutorial [here](https://youtu.be/P9vs-zN-jFI)
 
-## 3D Gaussian Splatting on Windows: A Definitive Anaconda Setup Guide
-
 # 3D Gaussian Splatting on Windows: A Definitive Anaconda Setup Guide
 
 This guide provides a clear, step-by-step process for setting up the original **3D Gaussian Splatting** project on a modern **Windows 10/11** machine using the **Anaconda distribution**.  
